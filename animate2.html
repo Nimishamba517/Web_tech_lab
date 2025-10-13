@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">    
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Script Tasks</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        p, ul, div {
+            margin: 10px 0;
+            padding: 10px;
+        }
+        p, ul li {
+            color: #333;
+        }
+        .box {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 10px;
+        }
+        #box1 {
+            background-color: #e59191;
+        }
+        #box2 {
+            background-color: #30a3d4;
+        }
+    </style>
+</head>
+<body>
+    <h2>Append Content</h2>
+    <p id="para">This is an existing paragraph</p>
+    <ul id="list">
+        <li>Item 1</li>
+        <li>Item 2</li>
+    </ul>
+    <button id="appendBtn">Append Next Item</button>
+
+    <h2>Animate Elements</h2>
+    <div class="box" id="box1"></div>
+    <button class="animateBtn" data-target="#box1">Animate Box 1</button>
+
+    <div class="box" id="box2"></div>
+    <button class="animateBtn" data-target="#box2">Animate Box 2</button>
+
+    <script>
+        $(document).ready(function () {
+            const colors = ['red', 'green', 'blue', 'purple', 'orange'];
+            const sizes = ['14px', '16px', '18px', '20px', '22px'];
+            let appendIndex = 0;
+            let itemCount = $('#list li').length;
+
+            $("#appendBtn").click(() => {
+                if (appendIndex < colors.length) {
+                    itemCount++;
+                    $("#para").append(` - Appended Text ${itemCount}`);
+                    $("#list").append(`<li style="color:${colors[appendIndex]}; font-size:${sizes[appendIndex]};">Item ${itemCount}</li>`);
+                    appendIndex++;
+                } else {
+                    alert("All items have been appended.");
+                }
+            });
+
+            $(".animateBtn").click(function () {
+                const target = $($(this).data("target"));
+                target.css({
+                    width: "100px",
+                    height: "100px"
+                }).animate({
+                    width: "150px",
+                    height: "150px"
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
